@@ -2,7 +2,7 @@ import { registerRootComponent } from 'expo';
 import * as firebase from 'firebase';
 
 
-// Initialize Firebase
+// Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyDme40nJ_ZAobvNLXyeZJnSD9iF4Nfo8ao",
     authDomain: "bird-app-test.firebaseapp.com",

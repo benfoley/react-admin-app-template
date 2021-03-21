@@ -7,41 +7,30 @@ import { EntryT, RootStackParamList } from '../types'
 import { StackScreenProps } from '@react-navigation/stack';
 
 
-const Item = ({ item }, navigation) => (
-    <View>
-        <TouchableOpacity
-            key={item.id}
-            onPress={() => navigation.navigate('BirdDetail', {item})}
-        >
-            <Text>{item.entry_word}</Text>
-        </TouchableOpacity>
-
-    </View>
-);
-
 
 export default function EntryList({navigation}: StackScreenProps<RootStackParamList, 'EntryList'>) {
 
-    let entriesRef = firebase.firestore().collection('entries');
+    let entriesRef = firebase.firestore().collection('entry');
     const [ entriesData, setEntries ] = useState<EntryT[]>([]);
 
     useEffect(() => {
         return entriesRef.onSnapshot((querySnapshot) => {
             const entriesList:any = [];
             querySnapshot.forEach(doc => {
-                const { entry_word } = doc.data();
-                entriesList.push({id: doc.id, entry_word})
+                const { title, info } = doc.data();
+                entriesList.push({id: doc.id, title, info})
             });
             setEntries(entriesList)
         });
     }, []);
 
-    const renderItem = ({item}) => (
+    const renderItem = ({item}:any) => (
         <TouchableOpacity
+            style={styles.linkWrapper}
             key={item.id}
             onPress={() => navigation.navigate('EntryDetail', {entry: item})}
         >
-            <Text style={styles.link}>{item.entry_word}</Text>
+            <Text style={styles.link}>{item.title}</Text>
         </TouchableOpacity>
 
     );
@@ -62,7 +51,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'center'
+    },
+    linkWrapper: {
+        borderBottomColor: 'pink',
+        borderBottomWidth: 2,
     },
     link: {
         fontSize: 32,

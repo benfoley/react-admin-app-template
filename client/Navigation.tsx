@@ -27,7 +27,7 @@ function RootNavigator() {
             />
             <Stack.Screen name="EntryDetail"
                           component={EntryDetail}
-                          options={({route}) => ({title: route.params.entry.entry_word})}
+                          options={({route}) => ({title: route.params.entry.title})}
             />
         </Stack.Navigator>
     );

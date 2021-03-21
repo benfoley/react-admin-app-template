@@ -1,6 +1,7 @@
 export interface EntryT {
     id: number;
-    entry_word: string;
+    title: string;
+    info?: string;
 }
 
 export type RootStackParamList = {
