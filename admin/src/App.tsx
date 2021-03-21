@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Admin, Resource } from 'react-admin';
+import { FirebaseAuthProvider, FirebaseDataProvider } from 'react-admin-firebase';
+import { EntryList, EntryShow, EntryCreate, EntryEdit } from './Entry';
+import Dashboard from './Dashboard';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+// Firebase config
+const firebaseConfig = {
+    apiKey: "AIzaSyDme40nJ_ZAobvNLXyeZJnSD9iF4Nfo8ao",
+    authDomain: "bird-app-test.firebaseapp.com",
+    projectId: "bird-app-test",
+    storageBucket: "bird-app-test.appspot.com",
+    messagingSenderId: "288941485898",
+    appId: "1:288941485898:web:7f9b4213238b538cf49bb3"
+};
+
+const options = { relativeFilePaths: false };
+const dataProvider = FirebaseDataProvider(firebaseConfig, options);
+const authProvider = FirebaseAuthProvider(firebaseConfig, options);
+
+const App = () => (
+    <Admin
+        authProvider={authProvider}
+        dataProvider={dataProvider}
+        dashboard={Dashboard} >
+      <Resource name="entry" list={EntryList} create={EntryCreate} show={EntryShow} edit={EntryEdit} />
+    </Admin >
+)
 
 export default App;
