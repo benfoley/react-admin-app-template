@@ -1,0 +1,12 @@
+{
+  "name": "firebase-master-detail",
+  "displayName": "firebase-master-detail",
+  "expo": {
+    "name": "firebase-master-detail",
+    "slug": "firebase-master-detail",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
