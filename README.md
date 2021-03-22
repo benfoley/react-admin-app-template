@@ -20,13 +20,13 @@ npm install --global expo-cli
 
 Make a Firebase project, add a Firestore database and add some data. 
 
-For now, make the Firestore rules public. This is not ideal, so in production be sure to add authentication to the app and then tighten up the rules to be authenticated users only. 
+Set the Firestore rules to only allow authenticated write and read. 
 ```
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     match /{document=**} {
-      allow read, write: if true;
+      allow read, write: if request.auth != null;
     }
   }
 }
@@ -102,5 +102,5 @@ Sign in, and you should see the Dashboard. Click the "Entries" menu item in the 
 
 When logged int, the user account widget in the top right shows `null` because the account doesn't have a display name. Should fix this.
 
-The app should authenticate to Firestore as a guest, then the Firestore rules can be tightened.
-> https://medium.com/enappd/anonymous-login-in-react-native-apps-with-firebase-18612cb1106a
+The app authenticates to Firestore as an anonymous user. Probably should include tokens or something to prevent anyone getting access using the API keys published here! 
+
