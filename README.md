@@ -2,6 +2,8 @@
 
 This combines a [ReactAdmin](https://marmelab.com/react-admin/) site and [React Native](https://reactnative.dev/) app, with data from [Firebase Firestore](https://firebase.google.com/docs/firestore). [React-admin-firebase](https://github.com/benwinding/react-admin-firebase) is used to connect the admin site to Firebase. [Expo](https://expo.io/) is used for the React Native stuff for convenience.
 
+![](images/admin.png)
+![](images/client.png)
 
 ## Requirements
 
