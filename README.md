@@ -1,6 +1,6 @@
 # Template React Firebase project
 
-This combines a [ReactAdmin](https://marmelab.com/react-admin/) site and [React Native](https://reactnative.dev/) app, with data from [Firebase Firestore](https://firebase.google.com/docs/firestore). [Expo](https://expo.io/) is used for the React Native stuff for convenience.
+This combines a [ReactAdmin](https://marmelab.com/react-admin/) site and [React Native](https://reactnative.dev/) app, with data from [Firebase Firestore](https://firebase.google.com/docs/firestore). [React-admin-firebase](https://github.com/benwinding/react-admin-firebase) is used to connect the admin site to Firebase. [Expo](https://expo.io/) is used for the React Native stuff for convenience.
 
 
 ## Requirements
@@ -18,11 +18,25 @@ npm install --global expo-cli
 
 ## Firebase
 
-Make a Firebase project, add a Firestore database and add some data. Copy the web config data.
+Make a Firebase project, add a Firestore database and add some data. 
+
+For now, make the Firestore rules public. This is not ideal, so in production be sure to add authentication to the app and then tighten up the rules to be authenticated users only. 
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+```
 
 Add an authentication method in Firebase > Authentication > Get Started. The admin code in this project uses email signin method and no registration. 
 
 Add yourself as a user in Firebase > Authentication.
+
+Copy the web config data from the Firebase project settings. These will be copied into the admin and client code.
 
 
 ## Data 
@@ -82,3 +96,10 @@ yarn start
 The admin site should open in a browser at `http://localhost:3000/`.
 
 Sign in, and you should see the Dashboard. Click the "Entries" menu item in the left sidebar to administer content.
+
+
+## TODO
+
+When logged int, the user account widget in the top right shows `null` because the account doesn't have a display name. Should fix this.
+
+The app should authenticate to Firestore as a guest, then the Firestore rules can be tightened. 
