@@ -7,22 +7,33 @@ import { EntryT, RootStackParamList } from '../types'
 import { StackScreenProps } from '@react-navigation/stack';
 
 
-
 export default function EntryList({navigation}: StackScreenProps<RootStackParamList, 'EntryList'>) {
 
     let entriesRef = firebase.firestore().collection('entry');
     const [ entriesData, setEntries ] = useState<EntryT[]>([]);
 
     useEffect(() => {
-        return entriesRef.onSnapshot((querySnapshot) => {
-            const entriesList:any = [];
-            querySnapshot.forEach(doc => {
-                const { title, info } = doc.data();
-                entriesList.push({id: doc.id, title, info})
+        // Sign in automatically as anonymous user
+        firebase.auth().signInAnonymously()
+            .then(() => {
+                // Get the entries collection
+                return entriesRef.onSnapshot((querySnapshot) => {
+                    // Build an array to populate the FlatList
+                    const entriesList: any = [];
+                    querySnapshot.forEach(doc => {
+                        const {title, info} = doc.data();
+                        entriesList.push({id: doc.id, title, info})
+                    });
+                    setEntries(entriesList)
+                });
+            })
+            .catch((error) => {
+                // Should handle authentication errors better
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log("Authentication failed", errorMessage)
             });
-            setEntries(entriesList)
-        });
-    }, []);
+        }, []);
 
     const renderItem = ({item}:any) => (
         <TouchableOpacity

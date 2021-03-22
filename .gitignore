@@ -67,7 +67,7 @@ buck-out/
 # Expo
 .expo/*
 web-build/
-
+client/.expo/*
 
 
 # REACT

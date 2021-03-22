@@ -102,4 +102,5 @@ Sign in, and you should see the Dashboard. Click the "Entries" menu item in the 
 
 When logged int, the user account widget in the top right shows `null` because the account doesn't have a display name. Should fix this.
 
-The app should authenticate to Firestore as a guest, then the Firestore rules can be tightened. 
+The app should authenticate to Firestore as a guest, then the Firestore rules can be tightened.
+> https://medium.com/enappd/anonymous-login-in-react-native-apps-with-firebase-18612cb1106a
