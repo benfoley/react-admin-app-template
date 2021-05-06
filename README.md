@@ -20,7 +20,7 @@ npm install --global expo-cli
 
 ## Firebase
 
-Make a Firebase project, add a Firestore database and add some data. 
+Make a Firebase project, add a Firestore database. 
 
 Set the Firestore rules to only allow authenticated write and read. 
 ```
@@ -36,31 +36,33 @@ service cloud.firestore {
 
 Add an authentication method in Firebase > Authentication > Get Started. The admin code in this project uses email signin method and no registration. 
 
-Add yourself as a user in Firebase > Authentication.
+Add yourself as a user in Firebase > Authentication > Users.
 
 Copy the web config data from the Firebase project settings. These will be copied into the admin and client code.
 
 
 ## Data 
 
-This project assumes a collection of docs with `first_key`, `title` and `info` (optional) fields. See the `data/sample.json` file for dummy data. Here's a snippet:
+This project assumes that the data is a collection of docs with `title` and `info` (optional) fields. If you want to provide an ID for each entry, include the ID as the `first_key` value. If you don't include this key, Firebase will auto generate an ID. See the `data/sample.json` file for dummy data. Here's a snippet with just one doc:
 
 ```
 {
     "entry": [
         {
-            "first_key": "605750a86642f62e2302e873",
+            "first_key": "605750a83c1065c082efec0a",
             "title": "incididunt dolore tempor",
             "info": "this field is optional"
         }
     ]
 }
 ```
-Make a data file locally. 
 
-If using a [JSON generator](https://next.json-generator.com/EyTd3VxV9) to build dummy data, the exported data will be a JSON array. Edit the exported data file and wrap the data array with the "entry" name and enclose it in an object `{}` as per the template above.
+If using a [JSON generator](https://next.json-generator.com/EyTd3VxV9) to build dummy data, the exported data may be a JSON array. Edit the exported data file and wrap the data array with the "entry" name and enclose it in an object `{}` as per the example above.
 
-Import the data to Firestore using [firestore-export-import](https://www.npmjs.com/package/firestore-export-import). 
+Make a data file locally with seed data and import it to Firestore using [firestore-export-import](https://www.npmjs.com/package/firestore-export-import). 
+
+To use your own data schema, remember to change the admin site and app code!
+
 
 ## Code
 
@@ -102,7 +104,7 @@ Sign in, and you should see the Dashboard. Click the "Entries" menu item in the 
 
 ## TODO
 
-When logged int, the user account widget in the top right shows `null` because the account doesn't have a display name. Should fix this.
+- When logged in, the user account widget in the top right shows `null` because the account doesn't have a display name. Should fix this.
 
-The app authenticates to Firestore as an anonymous user. Probably should include tokens or something to prevent anyone getting access using the API keys published here! 
+- The app authenticates to Firestore as an anonymous user. Probably should include tokens or something to prevent anyone getting access using the API keys published here! 
 
