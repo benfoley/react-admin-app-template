@@ -56,18 +56,18 @@ This project assumes a collection of docs with `first_key`, `title` and `info` (
     ]
 }
 ```
-
-Import dummy data to Firestore using [firestore-export-import](https://www.npmjs.com/package/firestore-export-import). 
+Make a data file locally. 
 
 If using a [JSON generator](https://next.json-generator.com/EyTd3VxV9) to build dummy data, the exported data will be a JSON array. Edit the exported data file and wrap the data array with the "entry" name and enclose it in an object `{}` as per the template above.
 
+Import the data to Firestore using [firestore-export-import](https://www.npmjs.com/package/firestore-export-import). 
 
 ## Code
 
 Clone this repo.
 ```
-git clone git@github.com:benfoley/react-firebase-master-detail-template.git
-cd react-firebase-master-detail-template
+git clone git@github.com:benfoley/react-admin-app-template.git
+cd react-admin-app-template
 ```
 
 
@@ -82,7 +82,7 @@ yarn install
 expo start
 ```
 
-Now you should see a list of your entry titles in the emulator app.
+Now you should see a list of your data's entry titles in the emulator app.
 
 
 ## Admin site
